@@ -1,0 +1,31 @@
+
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>SEAMM flowchart viewer</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <script src="{{ url_for('static', filename='cytoscape.min.js') }}"></script>
+    <!-- for testing with local version of cytoscape.js -->
+    <!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+  </head>
+
+  <body>
+
+    <h1>SEAMM Flowchart viewer</h1>
+
+    Upload a custom flowchart or view the demo <br><br><br>
+
+    <div id="toolbar">
+      <a href="{{ url_for('draw_flowchart') }}"><button id="home" class="customButtons"> View Demo Flowchart - hc_mopac.flow </button></a>
+      <a href="{{ url_for('upload_file') }}"><button id="upload" class="customButtons"> Upload flowchart</button></a>
+   </div>
+   
+  </body>
+
+</html>

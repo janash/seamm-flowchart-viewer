@@ -1,0 +1,85 @@
+
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>SEAMM flowchart view</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <script src="{{ url_for('static', filename='cytoscape.min.js') }}"></script>
+    <!-- for testing with local version of cytoscape.js -->
+    <!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function(){
+
+      var cy = window.cy = cytoscape({
+        container: document.getElementById('cy'),
+
+        boxSelectionEnabled: false,
+        autounselectify: true,
+
+        layout: {
+          name: 'preset'
+        },
+
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'rectangle',
+              'background-color': '#DCDCDC',
+              'label': 'data(name)',
+              'text-halign': 'center',
+              'text-valign': 'center',
+              'width': 200,
+            }
+          },
+
+          {
+            selector: 'edge',
+            style: {
+              'width': 4,
+              'target-arrow-shape': 'triangle',
+              'line-color': '#696969',
+              'target-arrow-color': '#696969',
+              'curve-style': 'bezier',
+            }
+          }
+        ],
+
+        elements: 
+          {{ data|safe }}
+      });
+
+      cy.nodes('[name = "Join"]').style( {
+              'shape': 'ellipse',
+              'background-color': '#000000',
+              'label': 'data(name)',
+              'text-halign': 'right',
+              'text-valign': 'center',
+              'width': 30,
+            });
+
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <h1>flowchart.flow</h1>
+
+    <div id="toolbar">
+      <a href="#"><button id="home" class="customButtons"> Home </button></a>
+      <a href="{{ url_for('upload_file') }}"><button id="upload" class="customButtons"> Upload another flowchart</button></a>
+   </div>
+
+    <div id="cy"></div>
+   
+  </body>
+
+</html>

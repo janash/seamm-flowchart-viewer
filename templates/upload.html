@@ -1,0 +1,14 @@
+
+<!doctype html>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+
+
+<body>
+<title>Upload Flowchart</title>
+<h1>Upload Flowchart</h1>
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
+</body>
