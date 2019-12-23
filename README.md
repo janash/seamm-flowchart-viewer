@@ -15,4 +15,4 @@ in your terminal.
 
 Open a browser and navigate to `localhost:5000` to start using the viewer. You can view the demo, or upload your own flowchart.
 
-!(demo.png)
+![demo](demo.png)
