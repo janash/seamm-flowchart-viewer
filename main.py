@@ -13,14 +13,8 @@ ALLOWED_EXTENSIONS = set(['flow'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
-if not os.path.exists(UPLOAD_FOLDER):
-    os.mkdir(UPLOAD_FOLDER)
-
-
-
 @app.route("/", methods=['GET', 'POST'])
-def home_page():
+def home():
     session['flowchart'] = os.path.join('flowcharts', 'demos', 'hc_mopac.flow')
     return render_template('home.html')
 
@@ -39,6 +33,10 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
+            
+            if not os.path.exists(UPLOAD_FOLDER):
+                os.mkdir(UPLOAD_FOLDER)
+
             filename = secure_filename(file.filename)
 
             filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -95,4 +93,6 @@ def draw_flowchart():
     return render_template('render_flowchart.html', data=elements)
 
 if __name__ == "__main__":
+    
+    
     app.run(debug=True)
