@@ -6,7 +6,7 @@ from werkzeug.utils import secure_filename
 from util import process_flowchart, allowed_file
 
 app = Flask(__name__)
-app.secret_key = str(os.urandom(16))
+app.secret_key = b'i\xe4\xdbKG0\xe7\xb8\x90\xd3]\x0foI\x12\x85'
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'flowcharts', 'temp')
 ALLOWED_EXTENSIONS = set(['flow'])
