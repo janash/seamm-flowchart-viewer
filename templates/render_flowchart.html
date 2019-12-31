@@ -52,7 +52,7 @@
           }
         ],
 
-        elements: 
+        elements:
           {{ data|safe }}
       });
 
@@ -63,6 +63,10 @@
               'text-halign': 'right',
               'text-valign': 'center',
               'width': 30,
+            });
+
+      cy.nodes('[name = "Start"]').style( {
+              'shape': 'ellipse',
             });
 
       });
@@ -79,7 +83,7 @@
    </div>
 
     <div id="cy"></div>
-   
+
   </body>
 
 </html>
