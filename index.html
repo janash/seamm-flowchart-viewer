@@ -1,0 +1,158 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>SEAMM Flowchart</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <script src="static/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="static/custom.css">
+
+    <!-- for testing with local version of cytoscape.js -->
+    <!--<script src="../cytoscape.js/build/cytoscape.js"></script>-->
+
+    <style>
+      body {
+        font-family: helvetica;
+        font-size: 14px;
+      }
+
+      #cy {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 999;
+      }
+
+      h1 {
+        opacity: 0.5;
+        font-size: 1em;
+      }
+    </style>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){
+
+        var cy = window.cy = cytoscape({
+          container: document.getElementById('cy'),
+
+          boxSelectionEnabled: false,
+          autounselectify: true,
+
+          layout: {
+            name: 'preset'
+          },
+
+          style: [
+            {
+              selector: 'node',
+              style: {
+                'shape': 'rectangle',
+                'background-color': '#DCDCDC',
+                'label': 'data(name)',
+                'text-halign': 'center',
+                'text-valign': 'center',
+                'width': 200,
+              }
+            },
+
+            {
+              selector: 'edge',
+              style: {
+                'width': 4,
+                'target-arrow-shape': 'triangle',
+                'line-color': '#696969',
+                'target-arrow-color': '#696969',
+                'curve-style': 'bezier',
+              }
+            }
+          ],
+
+          elements: 
+          [{'data': {'id': 1, 'name': 'Start'}, 'position': {'x': 150, 'y': 35}},
+ {'data': {'id': 334533442609456439663275816612733859638, 'name': 'Custom'},
+  'position': {'x': 150, 'y': 105}},
+ {'data': {'id': 99669086889668936077019837452044852360, 'name': 'Table'},
+  'position': {'x': 150, 'y': 175}},
+ {'data': {'id': 332382701519578739062714223530219292801, 'name': 'Join'},
+  'position': {'x': 150, 'y': 315}},
+ {'data': {'id': 195831502896880085515236684904304129798, 'name': 'Loop'},
+  'position': {'x': 150, 'y': 385}},
+ {'data': {'id': 107054132216584631323260886050000243182,
+   'name': 'from SMILES'},
+  'position': {'x': 450, 'y': 385}},
+ {'data': {'id': 265264119009123826481730931398590769449, 'name': 'MOPAC'},
+  'position': {'x': 450, 'y': 455}},
+ {'data': {'id': 233591084822304749068254322334840534705, 'name': 'Table'},
+  'position': {'x': 150, 'y': 595}},
+ {'data': {'id': 226151018685604153637853441002966149066, 'name': 'Table'},
+  'position': {'x': 450, 'y': 525}},
+ {'data': {'id': 33227495517725645533955535209728604501, 'name': 'Table'},
+  'position': {'x': 150, 'y': 665}},
+ {'data': {'id': 138930809130548955438063473590094698323, 'name': 'Table'},
+  'position': {'x': 150, 'y': 245}},
+ {'data': {'id': '1_334533442609456439663275816612733859638',
+   'source': 1,
+   'target': 334533442609456439663275816612733859638}},
+ {'data': {'id': '334533442609456439663275816612733859638_99669086889668936077019837452044852360',
+   'source': 334533442609456439663275816612733859638,
+   'target': 99669086889668936077019837452044852360}},
+ {'data': {'id': '332382701519578739062714223530219292801_195831502896880085515236684904304129798',
+   'source': 332382701519578739062714223530219292801,
+   'target': 195831502896880085515236684904304129798}},
+ {'data': {'id': '195831502896880085515236684904304129798_107054132216584631323260886050000243182',
+   'source': 195831502896880085515236684904304129798,
+   'target': 107054132216584631323260886050000243182}},
+ {'data': {'id': '107054132216584631323260886050000243182_265264119009123826481730931398590769449',
+   'source': 107054132216584631323260886050000243182,
+   'target': 265264119009123826481730931398590769449}},
+ {'data': {'id': '195831502896880085515236684904304129798_233591084822304749068254322334840534705',
+   'source': 195831502896880085515236684904304129798,
+   'target': 233591084822304749068254322334840534705}},
+ {'data': {'id': '265264119009123826481730931398590769449_226151018685604153637853441002966149066',
+   'source': 265264119009123826481730931398590769449,
+   'target': 226151018685604153637853441002966149066}},
+ {'data': {'id': '226151018685604153637853441002966149066_332382701519578739062714223530219292801',
+   'source': 226151018685604153637853441002966149066,
+   'target': 332382701519578739062714223530219292801}},
+ {'data': {'id': '233591084822304749068254322334840534705_33227495517725645533955535209728604501',
+   'source': 233591084822304749068254322334840534705,
+   'target': 33227495517725645533955535209728604501}},
+ {'data': {'id': '99669086889668936077019837452044852360_138930809130548955438063473590094698323',
+   'source': 99669086889668936077019837452044852360,
+   'target': 138930809130548955438063473590094698323}},
+ {'data': {'id': '138930809130548955438063473590094698323_332382701519578739062714223530219292801',
+   'source': 138930809130548955438063473590094698323,
+   'target': 332382701519578739062714223530219292801}}]
+
+        });
+
+        cy.nodes('[name = "Join"]').style( {
+                'shape': 'ellipse',
+                'background-color': '#000000',
+                'label': 'data(name)',
+                'text-halign': 'right',
+                'text-valign': 'center',
+                'width': 30,
+              });
+
+        cy.nodes('[name = "Start"]').style( {
+        'shape': 'ellipse',
+      });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>flowchart.flow</h1>
+
+    <div id="cy"></div>
+
+  </body>
+
+</html>
