@@ -48,20 +48,47 @@ def upload_file():
     return render_template("upload.html")
 
 @app.route('/view_flowchart', methods=['GET', 'POST'])
-def draw_flowchart():
+@app.route('/view_flowchart/<flowchart_keys>', methods=['GET', 'POST'])
+def draw_flowchart(flowchart_keys=None):
 
+    if flowchart_keys is None:
+        flowchart_keys = 'flowchart_json'
+    
     sample_flow = session['flowchart']
-    important_stuff = process_flowchart(sample_flow)['flowchart_json']
 
+    important_stuff =  process_flowchart(sample_flow)
 
-    # Process the flowchart
+    for key in flowchart_keys.split(','):
+        if isinstance(important_stuff, list):
+            key = int(key)
+        important_stuff =important_stuff[key]
+
     elements = []
 
-    for node in important_stuff['nodes']:
-        #print(node)
+    for node_number, node in enumerate(important_stuff['nodes']):
+        
+        ## Build URLs for nodes with subflowcharts
+        node_keys = flowchart_keys
+        node_keys += ',nodes'
+
+        original_length = len(node_keys)
+        
+        for key in node.keys():
+            if 'flowchart' in key.lower():
+                node_keys += ",{}".format(node_number)
+                node_keys += ",{}".format(key)
+        
+        url = "#"
+
+        if len(node_keys) > original_length:
+            url=url_for('draw_flowchart', flowchart_keys=node_keys)
+
+        
+        ## Build elements for cytoscape
         elements.append({'data': {
             'id': node['attributes']['_uuid'],
             'name': node['attributes']['_title'],
+            'url': url,
             
         },
         'position': {
@@ -71,8 +98,6 @@ def draw_flowchart():
 
         'description': "",                
         })
-        
-        keys = [key for key in node.keys() if 'flowchart' in key.lower() ]
         
 
     for edge in important_stuff['edges']:
@@ -89,8 +114,9 @@ def draw_flowchart():
 
         elements.append(edge_data)
 
+        flowchart_text = render_template('flowchart.js', data=elements)
 
-    return render_template('render_flowchart.html', data=elements)
+    return render_template('render_flowchart.html', flowchart_script=flowchart_text)
 
 if __name__ == "__main__":
     

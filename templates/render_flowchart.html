@@ -15,61 +15,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
 
     <script>
-    window.addEventListener('DOMContentLoaded', function(){
-
-      var cy = window.cy = cytoscape({
-        container: document.getElementById('cy'),
-
-        boxSelectionEnabled: false,
-        autounselectify: true,
-
-        layout: {
-          name: 'preset'
-        },
-
-        style: [
-          {
-            selector: 'node',
-            style: {
-              'shape': 'rectangle',
-              'background-color': '#DCDCDC',
-              'label': 'data(name)',
-              'text-halign': 'center',
-              'text-valign': 'center',
-              'width': 200,
-            }
-          },
-
-          {
-            selector: 'edge',
-            style: {
-              'width': 4,
-              'target-arrow-shape': 'triangle',
-              'line-color': '#696969',
-              'target-arrow-color': '#696969',
-              'curve-style': 'bezier',
-            }
-          }
-        ],
-
-        elements:
-          {{ data|safe }}
-      });
-
-      cy.nodes('[name = "Join"]').style( {
-              'shape': 'ellipse',
-              'background-color': '#000000',
-              'label': 'data(name)',
-              'text-halign': 'right',
-              'text-valign': 'center',
-              'width': 30,
-            });
-
-      cy.nodes('[name = "Start"]').style( {
-              'shape': 'ellipse',
-            });
-
-      });
+      {{ flowchart_script|safe }}
     </script>
   </head>
 
